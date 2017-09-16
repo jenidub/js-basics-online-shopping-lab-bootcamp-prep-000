@@ -17,8 +17,8 @@ function addToCart(item) {
 }
 
 function viewCart() {
-  // write your code here
   var itemnum = cart.length
+  var printout = "In your cart, you have "
 
   if (itemnum >= 2) {
     for (var i = 0; i < itemnum; i++) {
@@ -33,10 +33,16 @@ function viewCart() {
       }
     }
     console.log(printout)
-  } else if (itemnum == 1) {
-    console.log("In your cart, you have " + cart[0] + " at $" + cart[0][1] + ".")
-  } else {
-    console.log("There is nothing in your cart.")
+  }
+
+  else if (itemnum == 1) {
+    for (var x in cart[0]){
+      console.log("In your cart, you have " + x + " at $" + cart[0][x] + ".")
+    }
+  } 
+  
+  else {
+    console.log("Your shopping cart is empty.")
   }
 }
 
