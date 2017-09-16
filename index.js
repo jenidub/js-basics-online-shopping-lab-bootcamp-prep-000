@@ -21,19 +21,17 @@ function viewCart() {
   var itemnum = cart.length
 
   if (itemnum >= 2) {
-    var printout = "In your cart, you have "
-    var size = cart.length - 1
-
-    for (var i = 0; i < size; i++) {
+    for (var i = 0; i < itemnum; i++) {
       for (var x in cart[i]){
-        printout += x + " at $" + cart[i][x] + ", "
+        if (i !== itemnum-1 && itemnum >= 3) {
+          printout += x + " at $" + cart[i][x] + ", "
+        } else if (i !== itemnum-1) {
+          printout += x + " at $" + cart[i][x] + " "
+        } else {
+          printout += "and " + x + " at $" + cart[i][x] + "."
+        }
       }
     }
-
-    for (var y in cart[size]) {
-      printout += "and " + y + " at $" + cart[size][y] + "."
-    }
-
     console.log(printout)
   } else if (itemnum == 1) {
     console.log("In your cart, you have " + cart[0] + " at $" + cart[0][1] + ".")
@@ -43,11 +41,29 @@ function viewCart() {
 }
 
 function total() {
-  // write your code here
+  var total = 0
+  for (var i = 0; i < cart.length; i++) {
+    for (var x in cart[i]) {
+      total += parseInt(cart[i][x])
+    }
+  }
+  return total
 }
 
 function removeFromCart(item) {
-  // write your code here
+  var index = -1
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].hasOwnProperty(item) === true) {
+      index = 1
+    }
+  }
+
+  if(index !== -1) {
+    cart.splice(index, 1)
+    return cart
+  } else {
+    return ("That item is not in your cart.")
+  }
 }
 
 function placeOrder(cardNumber) {
